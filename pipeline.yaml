@@ -1,7 +1,7 @@
 pool:
-  vmImage: 'golang:latest'
+  vmImage: 'ubuntu:16.04'
 
-container: ubuntu:16.04
+container: 'golang:latest'
 
 variables:
   SRC_TF: "https://github.com/hashicorp/terraform"
