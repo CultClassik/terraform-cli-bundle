@@ -3,16 +3,24 @@ pool:
 
 container: ubuntu:16.04
 
-stages:
-- stage: TerraformToolsBuild
-  jobs:
-  - job:
-    steps:
-    - script: printenv
+variables:
+  SRC_TF: "https://github.com/hashicorp/terraform"
+  SRC_IBX: "https://github.com/infobloxopen/terraform-provider-infoblox"
+  IBX_VER: "1.0.1"
+  GO111MODULE: "on"
 
-- stage: InfobloxProviderBuild
-  dependsOn: []    # this removes the implicit dependency on previous stage and causes this to run in parallel
-  jobs:
-  - job:
-    steps:
-    - script: printenv
+steps:
+- script:
+    # build ibx provider
+    git clone ${SRC_IBX} /tmp/ibxsource
+    cd /tmp/ibxsource
+    golang make build
+    mkdir /tmp/plugins
+    mv ./ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
+    # build terraform tools
+    git clone ${SRC_TF} /tmp/tfsource
+    cd /tmp/tfsource
+    go install ./tools/terraform-bundle
+    terraform-bundle package -plugin-dir /tmp/plugins /data/terraform-bundle.hcl
+    ARTIFACT=`ls ./terraform_*`
+    mv ${ARTIFACT} /tmp
