@@ -33,4 +33,5 @@ rm -rf ./ibxsource
 # output
 BUNDLE_FILE=`ls ./terraform_*`
 SHA_SUM=`sha256sum ${BUNDLE_FILE}`
-echo "SHA 256 checksum for bundle to be used with Terraform Enterprise is: ${SHA_SUM}"
+echo "SHA 256 checksum for bundle to be used with Terraform Enterprise:"
+echo ${SHA_SUM}
