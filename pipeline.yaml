@@ -14,16 +14,12 @@ steps:
 - script:
 - bash: mkdir -p ${GOPATH}/src/github.com/infobloxopen
 - bash: git clone ${SRC_IBX} ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
-- bash: ls -la ${GOPATH}/src/github.com/infobloxopen
 - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
 - bash: ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
-#- bash: git clone ${SRC_IBX} /tmp/ibxsource
-#- bash: cd /tmp/ibxsource
 - bash: make build
-#- bash: ls -la /tmp/ibxsource
-
 - bash: mkdir /tmp/plugins
-- bash: mv /tmp/ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
+- bash: mv ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
+
 # build terraform tools
 - script:
 - bash: git clone ${SRC_TF} /tmp/tfsource
