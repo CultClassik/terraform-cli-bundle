@@ -20,7 +20,7 @@ stages:
     - bash: git clone $SRC_IBX $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: cd $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: make build
-    - bash: ls -la $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox"
+    - bash: ls -la $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: mv $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
 
 #  - job: BuildTerraformTools
