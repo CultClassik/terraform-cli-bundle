@@ -23,4 +23,3 @@ RUN mkdir -p ${GOBIN} &&\
 COPY terraform-bundle.hcl /tmp/
 
 RUN ${GOBIN}/terraform-bundle package -plugin-dir ~/.terraform.d/plugins /tmp/terraform-bundle.hcl
-
