@@ -17,6 +17,8 @@ steps:
     golang make build
     mkdir /tmp/plugins
     mv ./ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
+
+- script:
     # build terraform tools
     git clone ${SRC_TF} /tmp/tfsource
     cd /tmp/tfsource
