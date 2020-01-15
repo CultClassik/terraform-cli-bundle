@@ -15,6 +15,7 @@ steps:
 - bash: cd /tmp/ibxsource
 - bash: make build
 - bash: mkdir /tmp/plugins
+- bash: ls -la /tmp/ibxsource
 - bash: mv /tmp/ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
 
 - script:
