@@ -10,24 +10,27 @@ variables:
   GO111MODULE: "on"
   PLUGIN_DIR: /tmp/plugins
 
-jobs:
-- job: BuildInfobloxProvider
-  displayName: 'Build the Infoblox Provider'
-  steps:
-  - bash: mkdir $PLUGIN_DIR
-  - bash: mkdir -p $GOPATH/src/github.com/infobloxopen
-  - bash: git clone $SRC_IBX $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
-  - bash: cd $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
-  - bash: sudo apt install make -y && make build
-  - bash: ls -la $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox"
-  - bash: mv $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
+stages:
+- stage: MainStage
+  displayName: 'The one and only'
+  jobs:
+  - job: BuildInfobloxProvider
+    displayName: 'Build the Infoblox Provider'
+    steps:
+    - bash: mkdir $PLUGIN_DIR
+    - bash: mkdir -p $GOPATH/src/github.com/infobloxopen
+    - bash: git clone $SRC_IBX $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: cd $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: sudo apt install make -y && make build
+    - bash: ls -la $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox"
+    - bash: mv $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
 
-- job: BuildTerraformTools
-  displayName: 'Build the Terraform Tools'
-  steps:
-  - bash: git clone $SRC_TF /tmp/tfsource
-  - bash: cd /tmp/tfsource
-  - bash: go install ./tools/terraform-bundle
-  - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR /data/terraform-bundle.hcl
-  - bash: ARTIFACT=`ls ./terraform_*`
-  - bash: mv $ARTIFACT /tmp
+  - job: BuildTerraformTools
+    displayName: 'Build the Terraform Tools'
+    steps:
+    - bash: git clone $SRC_TF /tmp/tfsource
+    - bash: cd /tmp/tfsource
+    - bash: go install ./tools/terraform-bundle
+    - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR /data/terraform-bundle.hcl
+    - bash: ARTIFACT=`ls ./terraform_*`
+    - bash: mv $ARTIFACT /tmp
