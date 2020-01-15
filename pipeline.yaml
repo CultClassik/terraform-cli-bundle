@@ -16,7 +16,7 @@ steps:
 - bash: git clone ${SRC_IBX} ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
 - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
 #- bash: ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
-- bash: make build && ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+- bash: "make build && ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox"
 - bash: mkdir /tmp/plugins
 - bash: mv ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
 
