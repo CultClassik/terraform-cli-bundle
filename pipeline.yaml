@@ -10,13 +10,6 @@ variables:
   GO111MODULE: "on"
 
 steps:
-# build ibx provider
-- bash: git clone ${SRC_IBX} /tmp/ibxsource
-- bash: cd /tmp/ibxsource
-- bash: make build
-- bash: mkdir /tmp/plugins
-- bash: ls -la /tmp/ibxsource
-- bash: mv /tmp/ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
 
 - script:
 # build terraform tools
@@ -26,3 +19,12 @@ steps:
 - bash: terraform-bundle package -plugin-dir /tmp/plugins /data/terraform-bundle.hcl
 - bash: ARTIFACT=`ls ./terraform_*`
 - bash: mv ${ARTIFACT} /tmp
+
+# build ibx provider
+- bash: git clone ${SRC_IBX} /tmp/ibxsource
+- bash: cd /tmp/ibxsource
+- bash: make build
+- bash: mkdir /tmp/plugins
+- bash: ls -la /tmp/ibxsource
+- bash: mv /tmp/ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
+
