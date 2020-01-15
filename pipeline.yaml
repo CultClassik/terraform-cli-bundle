@@ -13,7 +13,7 @@ steps:
 # build ibx provider
 - bash: git clone ${SRC_IBX} /tmp/ibxsource
 - bash: cd /tmp/ibxsource
-- bash: golang make build
+- bash: make build
 - bash: mkdir /tmp/plugins
 - bash: mv ./ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
 
