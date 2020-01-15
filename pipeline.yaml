@@ -1,7 +1,3 @@
-
-
-container: 'golang:latest'
-
 variables:
   SRC_TF: "https://github.com/hashicorp/terraform"
   SRC_IBX: "https://github.com/infobloxopen/terraform-provider-infoblox"
@@ -15,6 +11,7 @@ stages:
   jobs:
   - job: BuildInfobloxProvider
     displayName: 'Build the Infoblox Provider'
+    container: 'golang:latest'
     pool:
       vmImage: 'ubuntu-18.04'
     steps:
@@ -28,6 +25,7 @@ stages:
 
   - job: BuildTerraformTools
     displayName: 'Build the Terraform Tools'
+    container: 'golang:latest'
     pool:
       vmImage: 'ubuntu-18.04'
     steps:
