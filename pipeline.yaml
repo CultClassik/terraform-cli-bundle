@@ -38,7 +38,7 @@ stages:
       inputs:
         command: publish
         publishDirectory: '$(Build.ArtifactStagingDirectory)'
-        vstsFeedPublish: 'terraform-bundles'
+        vstsFeedPublish: 'Diehlabs/terraform-bundles'
         vstsFeedPackagePublish: '$(ARTIFACT_NAME)'
         packagePublishDescription: 'Terraform CLI Bundle'
 
