@@ -18,8 +18,7 @@ RUN mkdir -p ${GOBIN} &&\
     cd /tmp/ibxsource &&\
     make build &&\
     mkdir -p ~/.terraform.d/plugins &&\
-    cp terraform-provider-infoblox ~/.terraform.d/plugins/terraform-provider-infoblox_v${IBX_VER} &&\
-    rm -rf /tmp
+    cp terraform-provider-infoblox ~/.terraform.d/plugins/terraform-provider-infoblox_v${IBX_VER}
 
 COPY terraform-bundle.hcl /tmp/
 
