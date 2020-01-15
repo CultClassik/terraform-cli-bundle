@@ -32,7 +32,7 @@ stages:
     - bash: git clone $SRC_TF /tmp/tfsource
     - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
     - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR ./terraform-bundle.hcl
-    - bash: ARTIFACT=`ls ./terraform_* | xargs -n 1 basename` && echo $ARTIFACT && echo "##vso[task.setvariable ariable=ARTIFACT_NAME;isOutput=true]$ARTIFACT"
+    - bash: ARTIFACT=`ls ./terraform_* | xargs -n 1 basename` && echo $ARTIFACT && echo "##vso[task.setvariable variable=ARTIFACT_NAME;isOutput=true]$ARTIFACT"
     - task: UniversalPackages@0
       displayName: Universal Publish
       inputs:
