@@ -35,3 +35,5 @@ BUNDLE_FILE=`ls ./terraform_*`
 SHA_SUM=`sha256sum ${BUNDLE_FILE}`
 echo "SHA 256 checksum for bundle to be used with Terraform Enterprise:"
 echo ${SHA_SUM}
+echo "For the version in Terraform Enterprise when uploading, use the portion of the filename that follows this format:"
+echo "N.N.N-bundleYYYYMMDDHH"
