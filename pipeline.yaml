@@ -1,0 +1,21 @@
+pool:
+  vmImage: 'golang:1.13.6'
+
+container: ubuntu:16.04
+
+steps:
+- script: printenv
+
+stages:
+- stage: TerraformToolsBuild
+  jobs:
+  - job:
+    steps:
+    - script: printenv
+
+- stage: InfobloxProviderBuild
+  dependsOn: []    # this removes the implicit dependency on previous stage and causes this to run in parallel
+  jobs:
+  - job:
+    steps:
+    - script: printenv
