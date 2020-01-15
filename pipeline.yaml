@@ -18,12 +18,7 @@ stages:
     - bash: mkdir $PLUGIN_DIR
     - bash: mkdir -p ${GOPATH}/src/github.com/infobloxopen
     - bash: git clone $SRC_IBX ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
-    - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox && pwd && make build
-#    - task: CMake@1
-#      inputs:
-#        workingDirectory: /go/src/github.com/infobloxopen/terraform-provider-infoblox
-#    - bash: pwd
-#    - bash: make build -v -C ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox && make build
     - bash: ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: mv ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
 
@@ -35,7 +30,6 @@ stages:
 #    dependsOn: BuildInfobloxProvider
 #    steps:
     - bash: git clone $SRC_TF /tmp/tfsource
-#    - bash: cd /tmp/tfsource
     - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
     - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR ./terraform-bundle.hcl
     - bash: ARTIFACT=`ls ./terraform_*`
