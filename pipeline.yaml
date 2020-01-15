@@ -13,22 +13,22 @@ variables:
 steps:
 # prep
 - script:
-  - bash: mkdir ${PLUGIN_DIR}
+- bash: mkdir ${PLUGIN_DIR}
 
 # build ibx provider
 - script:
-  - bash: mkdir -p ${GOPATH}/src/github.com/infobloxopen
-  - bash: git clone ${SRC_IBX} ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
-  - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
-  #- bash: ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
-  - bash: "make build && ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox"
-  - bash: mv ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox ${PLUGIN_DIR}/terraform-provider-infoblox_v${IBX_VER}
+- bash: mkdir -p ${GOPATH}/src/github.com/infobloxopen
+- bash: git clone ${SRC_IBX} ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+- bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+#- bash: ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+- bash: "make build && ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox"
+- bash: mv ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox ${PLUGIN_DIR}/terraform-provider-infoblox_v${IBX_VER}
 
 # build terraform tools
 - script:
-  - bash: git clone ${SRC_TF} /tmp/tfsource
-  - bash: cd /tmp/tfsource
-  - bash: go install ./tools/terraform-bundle
-  - bash: terraform-bundle package -plugin-dir ${PLUGIN_DIR} /data/terraform-bundle.hcl
-  - bash: ARTIFACT=`ls ./terraform_*`
-  - bash: mv ${ARTIFACT} /tmp
+- bash: git clone ${SRC_TF} /tmp/tfsource
+- bash: cd /tmp/tfsource
+- bash: go install ./tools/terraform-bundle
+- bash: terraform-bundle package -plugin-dir ${PLUGIN_DIR} /data/terraform-bundle.hcl
+- bash: ARTIFACT=`ls ./terraform_*`
+- bash: mv ${ARTIFACT} /tmp
