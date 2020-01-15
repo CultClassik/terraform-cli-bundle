@@ -33,13 +33,14 @@ stages:
     - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
     - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR ./terraform-bundle.hcl
     - bash: ARTIFACT=`ls ./terraform_* | xargs -n 1 basename` && echo $ARTIFACT && echo "##vso[task.setvariable variable=ARTIFACT_NAME;isOutput=true]$ARTIFACT"
+    - bash: ARTIFACT=`ls ./terraform_*` && mv ${ARTIFACT} $(Build.ArtifactStagingDirectory)
     - task: UniversalPackages@0
-      displayName: Universal Publish
+      displayName: Publish Terraform Bundle
       inputs:
         command: publish
         publishDirectory: '$(Build.ArtifactStagingDirectory)'
         vstsFeedPublish: 'Diehlabs/terraform-bundles'
-        vstsFeedPackagePublish: '$(ARTIFACT_NAME)'
+        vstsFeedPackagePublish: 'terraform-cli-bundle'
         packagePublishDescription: 'Terraform CLI Bundle'
 
 #    - publish: $(System.DefaultWorkingDirectory)/$(ARTIFACT_NAME)
