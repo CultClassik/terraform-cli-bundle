@@ -32,4 +32,15 @@ stages:
     - bash: git clone $SRC_TF /tmp/tfsource
     - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
     - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR ./terraform-bundle.hcl
-    - bash: ARTIFACT=`ls ./terraform_* | xargs -n 1 basename` && echo $ARTIFACT
+    - bash: ARTIFACT=`ls ./terraform_* | xargs -n 1 basename` && echo $ARTIFACT && echo "##vso[task.setvariable=ARTIFACT_NAME;]$ARTIFACT"
+    - task: UniversalPackages@0
+      displayName: Universal Publish
+      inputs:
+        command: publish
+        publishDirectory: '$(Build.ArtifactStagingDirectory)'
+        vstsFeedPublish: 'terraform-bundles'
+        vstsFeedPackagePublish: '$(ARTIFACT_NAME)'
+        packagePublishDescription: 'Terraform CLI Bundle'
+
+#    - publish: $(System.DefaultWorkingDirectory)/$(ARTIFACT_NAME)
+      #artifact: $(ARTIFACT_NAME)
