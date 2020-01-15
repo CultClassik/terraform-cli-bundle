@@ -12,13 +12,13 @@ variables:
 steps:
 # build ibx provider
 - script:
-#- bash: git clone ${SRC_IBX} /tmp/ibxsource
-- bash: go get github.com/infobloxopen/terraform-provider-infoblox
-- bash: ls -la ${GOHOME}
-- bash: cd ${GOHOME}/terraform-provider-infoblox
+- bash: git clone ${SRC_IBX} /tmp/ibxsource
+#- bash: go get github.com/infobloxopen/terraform-provider-infoblox
+#- bash: ls -la ${GOHOME}
+- bash: cd /tmp/ibxsource
 - bash: make build
-- bash: mkdir /tmp/plugins
 - bash: ls -la /tmp/ibxsource
+- bash: mkdir /tmp/plugins
 - bash: mv /tmp/ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
 # build terraform tools
 - script:
