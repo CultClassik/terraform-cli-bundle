@@ -16,16 +16,16 @@ stages:
       vmImage: 'ubuntu-18.04'
     steps:
     - bash: mkdir $PLUGIN_DIR
-    - bash: mkdir -p $GOPATH/src/github.com/infobloxopen
-    - bash: git clone $SRC_IBX $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
-    - bash: cd $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: mkdir -p ${GOPATH}/src/github.com/infobloxopen
+    - bash: git clone $SRC_IBX ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
 #    - task: CMake@1
 #      inputs:
 #        workingDirectory: /go/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: pwd
-    - bash: make build -v -C $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: make build -v -C ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: ls -la
-    - bash: mv $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
+    - bash: mv ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
 
 #  - job: BuildTerraformTools
 #    displayName: 'Build the Terraform Tools'
