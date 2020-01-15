@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'golang:1.13.6'
+  vmImage: 'golang:latest'
 
 container: ubuntu:16.04
 
