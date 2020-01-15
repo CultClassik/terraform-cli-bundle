@@ -18,7 +18,7 @@ stages:
     - bash: mkdir $PLUGIN_DIR
     - bash: mkdir -p ${GOPATH}/src/github.com/infobloxopen
     - bash: git clone $SRC_IBX ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
-    - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox && pwd
 #    - task: CMake@1
 #      inputs:
 #        workingDirectory: /go/src/github.com/infobloxopen/terraform-provider-infoblox
