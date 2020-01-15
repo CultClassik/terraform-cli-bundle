@@ -3,7 +3,7 @@ variables:
   SRC_IBX: "https://github.com/infobloxopen/terraform-provider-infoblox"
   IBX_VER: "1.0.1"
   GO111MODULE: "on"
-  PLUGIN_DIR: /tmp/plugins
+  PLUGIN_DIR: "/tmp/plugins"
 
 stages:
 - stage: MainStage
@@ -37,6 +37,6 @@ stages:
     - bash: git clone $SRC_TF /tmp/tfsource
 #    - bash: cd /tmp/tfsource
     - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
-    - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR /data/terraform-bundle.hcl
+    - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR ./terraform-bundle.hcl
     - bash: ARTIFACT=`ls ./terraform_*`
     - bash: mv $ARTIFACT /tmp
