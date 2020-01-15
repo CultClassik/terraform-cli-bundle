@@ -4,7 +4,7 @@ TF DEV ENV
 install GO
 
 set env vars for GO (go path, go bin path, added to user path..):
-	https://medium.com/@bixlerm/terraform-installing-3rd-party-modules-providers-dbf336713d2e	
+	https://medium.com/@bixlerm/terraform-installing-3rd-party-modules-providers-dbf336713d2e
 
 clone tf source :
 	https://github.com/hashicorp/terraform
