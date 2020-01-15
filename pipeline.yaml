@@ -23,7 +23,7 @@ stages:
 #      inputs:
 #        workingDirectory: /go/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: pwd
-    - bash: make build -v $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: make build -v -C $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: ls -la
     - bash: mv $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
 
