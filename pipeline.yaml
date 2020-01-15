@@ -22,8 +22,9 @@ stages:
 #    - task: CMake@1
 #      inputs:
 #        workingDirectory: /go/src/github.com/infobloxopen/terraform-provider-infoblox
-    - bash: make build -v
-    - bash: ls -la $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: pwd
+    - bash: make build -v .
+    - bash: ls -la
     - bash: mv $GOPATH/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
 
 #  - job: BuildTerraformTools
