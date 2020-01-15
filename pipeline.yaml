@@ -35,8 +35,8 @@ stages:
 #    dependsOn: BuildInfobloxProvider
 #    steps:
     - bash: git clone $SRC_TF /tmp/tfsource
-    - bash: cd /tmp/tfsource
-    - bash: go install ./tools/terraform-bundle
+#    - bash: cd /tmp/tfsource
+    - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
     - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR /data/terraform-bundle.hcl
     - bash: ARTIFACT=`ls ./terraform_*`
     - bash: mv $ARTIFACT /tmp
