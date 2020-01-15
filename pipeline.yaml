@@ -10,19 +10,18 @@ variables:
   GO111MODULE: "on"
 
 steps:
-- script:
-    # build ibx provider
-    git clone ${SRC_IBX} /tmp/ibxsource
-    cd /tmp/ibxsource
-    golang make build
-    mkdir /tmp/plugins
-    mv ./ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
+# build ibx provider
+- bash: git clone ${SRC_IBX} /tmp/ibxsource
+- bash: cd /tmp/ibxsource
+- bash: golang make build
+- bash: mkdir /tmp/plugins
+- bash: mv ./ibxsource/terraform-provider-infoblox /tmp/plugins/terraform-provider-infoblox_v${IBX_VER}
 
 - script:
-    # build terraform tools
-    git clone ${SRC_TF} /tmp/tfsource
-    cd /tmp/tfsource
-    go install ./tools/terraform-bundle
-    terraform-bundle package -plugin-dir /tmp/plugins /data/terraform-bundle.hcl
-    ARTIFACT=`ls ./terraform_*`
-    mv ${ARTIFACT} /tmp
+# build terraform tools
+- bash: git clone ${SRC_TF} /tmp/tfsource
+- bash: cd /tmp/tfsource
+- bash: go install ./tools/terraform-bundle
+- bash: terraform-bundle package -plugin-dir /tmp/plugins /data/terraform-bundle.hcl
+- bash: ARTIFACT=`ls ./terraform_*`
+- bash: mv ${ARTIFACT} /tmp
