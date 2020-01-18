@@ -6,8 +6,8 @@ variables:
   PLUGIN_DIR: "/tmp/plugins"
 
 stages:
-- stage: MainStage
-  displayName: 'The one and only'
+- stage: MacStage
+  displayName: 'Build for OSX'
   jobs:
   - job: BuildInfobloxProvider
     displayName: 'Build the Infoblox Provider'
@@ -15,20 +15,14 @@ stages:
     pool:
       vmImage: 'ubuntu-18.04'
     steps:
+    # infoblox provider
     - bash: mkdir $PLUGIN_DIR
     - bash: mkdir -p ${GOPATH}/src/github.com/infobloxopen
     - bash: git clone $SRC_IBX ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox && make build
     - bash: ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
     - bash: mv ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
-
-#  - job: BuildTerraformTools
-#    displayName: 'Build the Terraform Tools'
-#    container: 'golang:latest'
-#    pool:
-#      vmImage: 'ubuntu-18.04'
-#    dependsOn: BuildInfobloxProvider
-#    steps:
+    # tf tools
     - bash: git clone $SRC_TF /tmp/tfsource
     - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
     - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR ./terraform-bundle.hcl
@@ -40,7 +34,38 @@ stages:
         command: publish
         publishDirectory: '$(Build.ArtifactStagingDirectory)'
         vstsFeedPublish: 'Diehlabs/terraform-bundles'
-        vstsFeedPackagePublish: 'terraform-cli-bundle'
+        vstsFeedPackagePublish: 'terraform-cli-bundle-osx'
+        packagePublishDescription: 'Terraform CLI Bundle'
+
+- stage: LinuxStage
+  displayName: 'Build for Linux x64'
+  jobs:
+  - job: BuildInfobloxProvider
+    displayName: 'Build the Infoblox Provider'
+    container: 'golang:latest'
+    pool:
+      vmImage: 'ubuntu-18.04'
+    steps:
+    # infoblox provider
+    - bash: mkdir $PLUGIN_DIR
+    - bash: mkdir -p ${GOPATH}/src/github.com/infobloxopen
+    - bash: git clone $SRC_IBX ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: cd ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox && make build
+    - bash: ls -la ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox
+    - bash: mv ${GOPATH}/src/github.com/infobloxopen/terraform-provider-infoblox/terraform-provider-infoblox $PLUGIN_DIR/terraform-provider-infoblox_v$IBX_VER
+    # tf tools
+    - bash: git clone $SRC_TF /tmp/tfsource
+    - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
+    - bash: terraform-bundle package -plugin-dir $PLUGIN_DIR ./terraform-bundle.hcl
+    - bash: ARTIFACT=`ls ./terraform_* | xargs -n 1 basename` && echo $ARTIFACT && echo "##vso[task.setvariable variable=ARTIFACT_NAME;isOutput=true]$ARTIFACT"
+    - bash: ARTIFACT=`ls ./terraform_*` && mv ${ARTIFACT} $(Build.ArtifactStagingDirectory)
+    - task: UniversalPackages@0
+      displayName: Publish Terraform Bundle
+      inputs:
+        command: publish
+        publishDirectory: '$(Build.ArtifactStagingDirectory)'
+        vstsFeedPublish: 'Diehlabs/terraform-bundles'
+        vstsFeedPackagePublish: 'terraform-cli-bundle-linux64'
         packagePublishDescription: 'Terraform CLI Bundle'
 
 #    - publish: $(System.DefaultWorkingDirectory)/$(ARTIFACT_NAME)
