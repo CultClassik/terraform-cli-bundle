@@ -11,9 +11,8 @@ stages:
   jobs:
   - job: BuildInfobloxProvider
     displayName: 'Build the Infoblox Provider'
-    container: 'golang:latest'
     pool:
-      vmImage: 'ubuntu-18.04'
+      vmImage: 'macOS-10.14'
     steps:
     # infoblox provider
     - bash: mkdir $PLUGIN_DIR
