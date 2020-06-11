@@ -11,7 +11,7 @@ stages:
   displayName: 'Build for OSX'
   jobs:
   - job: BuildAzdoProvider
-    displayName: 'Build the Infoblox Provider'
+    displayName: 'Build the AZDO Provider'
     pool:
       vmImage: 'macOS-10.14'
     steps:
@@ -50,7 +50,7 @@ stages:
     - bash: mkdir $PLUGIN_DIR
     - bash: mkdir -p ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: git clone $SRC_AZDO ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
-    - bash: cd ${GOPATH}/src/github.com/imicrosoft/terraform-provider-azuredevops && make build
+    - bash: cd ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops && make build
     - bash: ls -la ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: mv ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops/terraform-provider-azuredevops $PLUGIN_DIR/terraform-provider-azuredevops_v$AZDO_VER
     # tf tools
