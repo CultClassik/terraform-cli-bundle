@@ -17,7 +17,7 @@ stages:
     steps:
     # azdo provider
     - bash: mkdir $PLUGIN_DIR
-    - bash: mkdir -p ${GOPATH}/src/github.com/microsoft
+    - bash: mkdir -p ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: git clone $SRC_AZDO ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: cd ${GOPATH}/src/github.com/imicrosoft/terraform-provider-azuredevops && make build
     - bash: ls -la ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
@@ -48,7 +48,7 @@ stages:
     steps:
     # azdo provider
     - bash: mkdir $PLUGIN_DIR
-    - bash: mkdir -p ${GOPATH}/src/github.com/microsoft
+    - bash: mkdir -p ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: git clone $SRC_AZDO ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: cd ${GOPATH}/src/github.com/imicrosoft/terraform-provider-azuredevops && make build
     - bash: ls -la ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
