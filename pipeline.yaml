@@ -21,7 +21,7 @@ stages:
     - bash: git clone $SRC_AZDO ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: cd ${GOPATH}/src/github.com/imicrosoft/terraform-provider-azuredevops && make build
     - bash: ls -la ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
-    - bash: mv ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops/terraform-provider-azuredevops $PLUGIN_DIR/terraform-provider-azuredevops_v$AZDO_VER
+    - bash: mv ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops $PLUGIN_DIR/terraform-provider-azuredevops_v$AZDO_VER
     # tf tools
     - bash: git clone $SRC_TF /tmp/tfsource
     - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
@@ -52,7 +52,7 @@ stages:
     - bash: git clone $SRC_AZDO ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: cd ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops && make build
     - bash: ls -la ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
-    - bash: mv ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops/terraform-provider-azuredevops $PLUGIN_DIR/terraform-provider-azuredevops_v$AZDO_VER
+    - bash: mv ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops $PLUGIN_DIR/terraform-provider-azuredevops_v$AZDO_VER
     # tf tools
     - bash: git clone --single-branch --branch $SRC_TF_BRANCH $SRC_TF /tmp/tfsource
     - bash: cd /tmp/tfsource && go install ./tools/terraform-bundle
