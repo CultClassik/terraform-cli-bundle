@@ -1,6 +1,6 @@
 variables:
   SRC_TF: "https://github.com/hashicorp/terraform"
-  SRC_TF_BRANCH: v0.13.0-beta1
+  SRC_TF_BRANCH: master #v0.13.0-beta1
   SRC_AZDO: "https://github.com/microsoft/terraform-provider-azuredevops"
   AZDO_VER: "1.0.3"
   GO111MODULE: "on"
