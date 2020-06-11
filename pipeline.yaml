@@ -40,8 +40,8 @@ stages:
 - stage: LinuxStage
   displayName: 'Build for Linux x64'
   jobs:
-  - job: BuildInfobloxProvider
-    displayName: 'Build the Infoblox Provider'
+  - job: BuildAzdoProvider
+    displayName: 'Build the AZDO Provider'
     container: 'golang:latest'
     pool:
       vmImage: 'ubuntu-18.04'
@@ -49,7 +49,7 @@ stages:
     # azdo provider
     - bash: mkdir $PLUGIN_DIR
     - bash: mkdir -p ${GOPATH}/src/github.com/microsoft
-    - bash: git clone $SRC_IBX ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
+    - bash: git clone $SRC_AZDO ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: cd ${GOPATH}/src/github.com/imicrosoft/terraform-provider-azuredevops && make build
     - bash: ls -la ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops
     - bash: mv ${GOPATH}/src/github.com/microsoft/terraform-provider-azuredevops/terraform-provider-azuredevops $PLUGIN_DIR/terraform-provider-azuredevops_v$AZDO_VER
